@@ -7,23 +7,7 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* ── MOBILE NAV TOGGLE ─────────────────────── */
-  var navToggle = document.querySelector('.nav-toggle');
-  var navPanel  = document.querySelector('.nav-mobile-panel');
-  if (navToggle && navPanel) {
-    navToggle.addEventListener('click', function () {
-      var open = navToggle.classList.toggle('open');
-      navPanel.classList.toggle('open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
-    navPanel.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        navToggle.classList.remove('open');
-        navPanel.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-    });
-  }
+  /* Nav toggle now lives inline in each page's top bar. */
 
   /* ── SCROLL REVEAL ──────────────────────────── */
   var revEls = document.querySelectorAll('.rev');

@@ -8,34 +8,48 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="styles.css"/>
+<link rel="stylesheet" href="styles.css?v=6"/>
+<style>
+/* Self-contained top bar — inlined so it never depends on cached CSS */
+.ezbar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;gap:2.5rem;height:74px;padding:0 1.5rem;background:linear-gradient(to bottom,rgba(8,8,8,0.97) 70%,transparent);}
+.ezbar-brand{font-family:'Lora',Georgia,serif;font-size:1.4rem;letter-spacing:0.06em;color:#F2F2F0;white-space:nowrap;flex-shrink:0;text-decoration:none;}
+.ezbar-nav{display:flex;align-items:center;gap:1.6rem;flex:1;}
+.ezbar-link{font-family:'Inter',system-ui,sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#B8B5B0;text-decoration:none;white-space:nowrap;transition:color .2s;}
+.ezbar-link:hover{color:#F2F2F0;}
+.ezbar-link.active{color:#C8962B;}
+.ezbar-cta{margin-left:auto;font-family:'Inter',system-ui,sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#C8962B;border:1px solid rgba(200,150,43,0.3);padding:0.55rem 1.2rem;white-space:nowrap;text-decoration:none;transition:background .2s,color .2s;flex-shrink:0;}
+.ezbar-cta:hover{background:#C8962B;color:#080808;}
+.ezbar-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;margin-left:auto;background:none;border:none;cursor:pointer;padding:0;}
+.ezbar-burger span{display:block;width:24px;height:2px;background:#F2F2F0;transition:transform .25s,opacity .25s;}
+.ezbar.open .ezbar-burger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.ezbar.open .ezbar-burger span:nth-child(2){opacity:0;}
+.ezbar.open .ezbar-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(max-width:1080px){
+  .ezbar-nav{position:absolute;top:74px;left:0;right:0;flex:none;flex-direction:column;align-items:stretch;gap:0;background:#080808;max-height:0;overflow:hidden;padding:0 1.5rem;transition:max-height .3s ease,padding .3s ease;}
+  .ezbar.open .ezbar-nav{max-height:85vh;padding:0.5rem 1.5rem 1.5rem;border-top:1px solid rgba(242,242,240,0.08);}
+  .ezbar-link{font-size:1rem;padding:1.1rem 0;border-bottom:1px solid rgba(242,242,240,0.08);}
+  .ezbar-cta{margin:1.25rem 0 0;text-align:center;padding:1rem;}
+  .ezbar-burger{display:flex;}
+}
+</style>
+
 </head>
 <body>
 
-<!-- ╔═ NAV ═══════════════════════════════════════╗ -->
-<nav>
-  <a href="index.html" class="nav-logo">Ezriyah</a>
-  <div class="nav-menu">
-    <a href="offer.html" class="nav-link">Offer</a>
-    <a href="books.html" class="nav-link">Books</a>
-    <a href="retreats.html" class="nav-link">Retreats</a>
-    <a href="blog.html" class="nav-link active">Blog</a>
-    <a href="about.html" class="nav-link">About</a>
+<!-- ═ TOP BAR (self-contained) ═ -->
+<header class="ezbar" id="ezbar">
+  <a href="index.html" class="ezbar-brand">Ezriyah</a>
+  <div class="ezbar-nav">
+    <a href="offer.html" class="ezbar-link">Offer</a>
+    <a href="books.html" class="ezbar-link">Books</a>
+    <a href="retreats.html" class="ezbar-link">Retreats</a>
+    <a href="blog.html" class="ezbar-link active">Blog</a>
+    <a href="about.html" class="ezbar-link">About</a>
+    <a href="offer.html#connect" class="ezbar-cta">Begin the Work</a>
   </div>
-    <a href="offer.html#connect" class="nav-cta">Begin the Work</a>
-    <button class="nav-toggle" aria-label="Menu">
-      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-</nav>
-<div class="nav-mobile-panel">
-  <a href="offer.html" class="nav-link">Offer</a>
-  <a href="books.html" class="nav-link">Books</a>
-  <a href="retreats.html" class="nav-link">Retreats</a>
-  <a href="blog.html" class="nav-link active">Blog</a>
-  <a href="about.html" class="nav-link">About</a>
-  <a href="offer.html#connect" class="nav-cta">Begin the Work</a>
-</div>
+  <button class="ezbar-burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</header>
+<script>(function(){var bar=document.getElementById('ezbar');if(!bar)return;var btn=bar.querySelector('.ezbar-burger');btn.addEventListener('click',function(){var o=bar.classList.toggle('open');btn.setAttribute('aria-expanded',o);});bar.querySelectorAll('.ezbar-nav a').forEach(function(a){a.addEventListener('click',function(){bar.classList.remove('open');btn.setAttribute('aria-expanded','false');});});})();</script>
 
 <!-- ╔═ PAGE HERO ═════════════════════════════════════╗ -->
 <section class="page-hero">
